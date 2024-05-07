@@ -24,11 +24,14 @@ package main
 import "fmt"
 
 func main() {
-	r := twoSum([]int{3, 3}, 6)
+	r := twoSumConsecutive([]int{3, 3}, 6)
 	fmt.Println(r)
+
+	r2 := twoSumPro([]int{1, 3, 5, 9}, 6)
+	fmt.Println(r2)
 }
 
-func twoSum(arr []int, target int) []int {
+func twoSumConsecutive(arr []int, target int) []int {
 	for i, v := range arr {
 		if v+arr[i+1] == target {
 			return []int{i, i + 1}
@@ -37,15 +40,15 @@ func twoSum(arr []int, target int) []int {
 	return []int{}
 }
 
-/*
-func twoSumEfficient(arr []int, target int) []int {
+func twoSumPro(arr []int, target int) []int {
 	mapa := make(map[int]int)
 	for i, v := range arr {
-		complemento := target - v
-		if mapa[i] == complemento {
-			return mapa[]{complemento}
+		complement := target - v
+		if x, ok := mapa[complement]; ok {
+			return []int{x, i}
+		} else {
+			mapa[v] = i
 		}
 	}
+	return []int{}
 }
-
-/*
