@@ -1,8 +1,6 @@
 /*
  * Reto #7
  * CONTANDO PALABRAS
- * Fecha publicación enunciado: 14/02/22
- * Fecha publicación resolución: 21/02/22
  * Dificultad: MEDIA
  *
  * Enunciado: Crea un programa que cuente cuantas veces se repite cada palabra y que muestre el recuento final de todas ellas.
@@ -19,30 +17,20 @@ import (
 )
 
 func main() {
-	contarPalabras("Hola amigos, mi nombre es Brais. Si, me llamo brais")
+	palabrasRepetidas("Hola amigos, mi nombre es Brais, si, me llamo brais. Eres parte de mis AMigos, verdad?")
 }
 
-func contarPalabras(texto string) {
-	textoMinuscula := strings.ToLower(texto)
-	letras := strings.Split(textoMinuscula, "")
-	var nuevoTexto string
+func palabrasRepetidas(frase string) {
+	fraseEnMinuscula := strings.ToLower(frase)
 	mapa := make(map[string]int)
-	for _, v := range letras {
-		if unicode.IsLetter([]rune(v)[0]) {
-			nuevoTexto += v
-		} else {
-			if v != "" {
-				_, ok := mapa[nuevoTexto]
-				if ok {
-					mapa[nuevoTexto]++
-				} else {
-					mapa[nuevoTexto] = 1
-				}
-				nuevoTexto = ""
-			}
-		}
+	fraseFiltrada := strings.FieldsFunc(fraseEnMinuscula, func(r rune) bool {
+		return !unicode.IsLetter(r)
+	})
+	for _, v := range fraseFiltrada {
+		mapa[v]++
 	}
+
 	for k, v := range mapa {
-		fmt.Println("La palabra", k, "tiene", v, "repeticiones.")
+		fmt.Printf("Para la palabra '%v' tenemos %v repeticiones\n", k, v)
 	}
 }
