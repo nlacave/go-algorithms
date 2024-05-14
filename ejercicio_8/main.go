@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	f := flipsMinimos("100110")
+	f := flipsMinimos("1110011000")
 	fmt.Println(f)
 }
 
